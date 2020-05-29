@@ -98,7 +98,7 @@ class SearchIndex extends React.Component {
 
           {this.filteredUsers().map(user => (
             <div className="search-result">
-              <img src={user.image} alt={user.firstName} />
+              <img src={user.image} alt={user.firstName} className="image"/>
               <div className="result-text-and-button">
               <p>{user.firstName} {user.lastName}</p>
               {this.isFriend(user.friends) && <button

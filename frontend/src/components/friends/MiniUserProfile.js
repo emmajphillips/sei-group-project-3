@@ -3,7 +3,7 @@ import React from 'react'
 const MiniUserProfile = ({ firstName, lastName, email, image, handleClick, id }) => (
 
 	<div>
-		<img src={image} alt={email} />
+		<img src={image} alt={email} className="image"/>
 		<p>{firstName} {lastName}</p>
 		<button
 			onClick={handleClick}

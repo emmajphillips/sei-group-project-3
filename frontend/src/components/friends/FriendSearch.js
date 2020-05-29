@@ -74,7 +74,7 @@ class FriendSearch extends React.Component {
               friend.accepted === true
             )).map(friend => (
               <div className="option-content">
-                <img src={friend.user.image} alt={friend.firstName} />
+                <img src={friend.user.image} alt={friend.firstName} className="image"/>
                 <p>{friend.firstName} {friend.user.lastName}</p>
                 {/* <p>{friend.lastName}</p> */}
                 <button
@@ -91,10 +91,10 @@ class FriendSearch extends React.Component {
             )).map(friend => {
               console.log('friend', friend.firstName)
               return (
-                <div>
-                  <img src={friend.user.image} alt={friend.firstName} />
+                <div className="option-content">
+                  <img src={friend.user.image} alt={friend.firstName} className="image"/>
                   <p>{friend.firstName} {friend.user.lastName}</p>
-                  <button className="button blue">Pending</button>
+                  <span>Pending</span>
                 </div>
               )
             })}

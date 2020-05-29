@@ -11,7 +11,7 @@ const withHeaders = () => {
 
 export const registerUser = formData => {
 	try {
-		console.log('registering user')
+		// console.log('registering user')
 		return axios.post(`${baseUrl}/register`, formData)
 	} catch (err) {
 		console.log('registrting', err)
@@ -21,7 +21,7 @@ export const registerUser = formData => {
 
 export const loginUser = formData => {
 	try{
-		console.log('logging in')
+		// console.log('logging in')
 		return axios.post(`${baseUrl}/login`, formData)
 	} catch(err) {
 		console.log('login', err)
@@ -31,7 +31,7 @@ export const loginUser = formData => {
 
 export const createExpense = formData => {
   try{
-		console.log('Creating an expense')
+		// console.log('Creating an expense')
 		return axios.post(`${baseUrl}/expenses`, formData)
 	} catch(err) {
 		console.log('login', err)
@@ -63,18 +63,18 @@ export const getUserFriends2 = userId => {
 }
 
 export const sendFriendRequest = userId => {
-	console.log('sending friend request')
-	console.log(withHeaders())
+	// console.log('sending friend request')
+	// console.log(withHeaders())
 		return axios.post(`${baseUrl}/users/${userId}/friends/requests`, {}, withHeaders())
 }
 
 export const acceptFriendRequest = (userId, requestId) => {
-	console.log('Accept userId', userId, 'requestId', requestId)
+	// console.log('Accept userId', userId, 'requestId', requestId)
 	return axios.put(`${baseUrl}/users/${userId}/friends/requests/${requestId}`, requestId, withHeaders())
 }
 
 export const rejectFriendRequest = (userId, requestId) => {
-	console.log('Reject userId', userId, 'requestId', requestId)
+	// console.log('Reject userId', userId, 'requestId', requestId)
 	return axios.delete(`${baseUrl}/users/${userId}/friends/requests/${requestId}`, withHeaders())
 }
 

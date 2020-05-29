@@ -1,8 +1,12 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { getSingleUser, editUser } from '../../lib/api'
 
 import UserForm from './UserForm'
+
+const uploadUrl = `${process.env.REACT_APP_CLOUDINARY_URL}`
+const uploadPreset = `${process.env.REACT_APP_CLOUDINARY_PRESET}`
 
 class UserUpdate extends React.Component {
   state = {
@@ -28,6 +32,15 @@ class UserUpdate extends React.Component {
   handleChange = event => {
     const formData = { ...this.state.formData, [event.target.name]: event.target.value }
     console.log(formData)
+    this.setState({ formData }, console.log(this.state))
+  }
+
+  handleUpload = async event => {
+    const data = new FormData()
+    data.append('file', event.target.files[0])
+    data.append('upload_preset', uploadPreset)
+    const res = await axios.post(uploadUrl, data)
+    const formData = {...this.state.formData, image: res.data.url}
     this.setState({ formData })
   }
 
@@ -51,7 +64,7 @@ class UserUpdate extends React.Component {
         <Link to={`/users/${userId}`}>Go back</Link>
         <h2 className="accountable-brand">Update Account</h2>
         <div className="image">
-          <img src={this.state.formData.image} alt={this.state.formData.firstName}/>
+          <img src={this.state.formData.image} alt={this.state.formData.firstName} className="image"/>
         </div>
         <br />
         <div className="container">
@@ -60,6 +73,7 @@ class UserUpdate extends React.Component {
               formData={this.state.formData}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              handleUpload={this.handleUpload}
             />
           </div>
         </div>

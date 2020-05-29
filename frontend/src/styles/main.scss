@@ -25,6 +25,7 @@ body {
 
 button.button {
   font-family: 'Poppins', sans-serif;
+  min-width: 100px;
 }
 
 button.blue {
@@ -44,6 +45,15 @@ button.other {
   color: #7A7477;
   font-weight: 300;
   border-bottom: 3px solid #CAC7C9;
+}
+
+.image {
+  height: 100px;
+  width: 100px;
+  max-height: 100px;
+  max-width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .balance-input {
@@ -76,7 +86,7 @@ nav.navbar {
     font-size: 24px;
   }
   a.plus {
-    margin: 0 0 0 780px;
+    // margin: 0 0 0 72%;
   }
 }
 
@@ -187,7 +197,7 @@ section.user-account {
       padding: 0;
       text-align: left;
       div {
-        padding: 0;
+        padding-left: 2.5rem;
         p {
           font-weight: 300;
         }
@@ -254,7 +264,8 @@ section.expenses {
     display: flex;
     justify-content: space-around;
     margin: 0;
-    width: 50%;
+    width: 80%;
+    max-width: 800px;
     span, a {
       width: 100%;
       padding: 0.5rem;
@@ -266,9 +277,10 @@ section.expenses {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 50%;
-    min-width: 250px;
     min-height: 250px;
+    width: 80%;
+    min-width: 250px;
+    max-width: 800px;
     border: 2px solid #CAC7C9;
     div.option {
       padding: 0 1rem;
@@ -281,16 +293,17 @@ section.expenses {
     }
     div.option-content {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
+      justify-content: space-between;
+      align-items: center;
       min-height: 40px;
       padding: 0 1rem;
       div.buttons {
-        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 1rem;
         button {
-          margin: 0.5rem auto;
-          width: 80%;
+          width: 150px;
         }
       }
     }
@@ -344,7 +357,8 @@ section.friends {
     display: flex;
     justify-content: space-around;
     margin: 0;
-    width: 50%;
+    width: 80%;
+    max-width: 800px;
     span, a {
       width: 100%;
       padding: 0.5rem;
@@ -355,23 +369,30 @@ section.friends {
   div.options {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    min-width: 250px;
+    justify-content: space-between;
     min-height: 250px;
+    width: 80%;
+    min-width: 250px;
+    max-width: 800px;
     border: 2px solid #CAC7C9;
     form {
       padding: 0.5rem;
     }
     div.option-content {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
       align-items: center;
       min-height: 40px;
-      margin-bottom: 10px;
+      width: 100%;
+      margin: 0 auto 10px;
       padding: 0 1rem;
       button {
-        margin: 0.5rem auto;
-        width: 30%;
+        width: 150px;
+      }
+      span {
+        width: 150px;
+        color: #7A7477;
+        text-align: right;
       }
     }
   }

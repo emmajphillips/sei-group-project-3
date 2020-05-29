@@ -1,7 +1,7 @@
 export const setToken = token => {
   try {
     window.localStorage.setItem('token', token)
-    console.log('token', token)
+    // console.log('token', token)
   } catch (err) {
     console.log('set token', err)
   }
@@ -17,7 +17,7 @@ export const getToken = () => {
 } 
 
 export const logout = () => {
-  console.log('logging out')
+  // console.log('logging out')
   localStorage.removeItem('token')
 }
 
@@ -33,7 +33,7 @@ export const getPayload = () => {
 export const isOwner = id => {
   try {
     const userId = getPayload().sub
-    console.log(id, userId)
+    // console.log(id, userId)
     return userId === id
   } catch (err) {
     console.log(err)

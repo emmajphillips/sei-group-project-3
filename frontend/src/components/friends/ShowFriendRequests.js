@@ -65,10 +65,9 @@ class ShowFriendsRequests extends React.Component {
 						{this.state.friends.filter(friend => (
 							friend.madeTheRequest === true && friend.accepted === false
 						)).map(friend => (
-							<div>
-							<p>{friend.firstName}<p>
-								</p>{friend.user.lastName}</p>
-								<img src={friend.user.image} alt={friend.firstName} />
+							<div className="option-content">
+								<img src={friend.user.image} alt={friend.firstName} className="image"/>
+							<p>{friend.firstName} {friend.user.lastName}</p>
 							<button 
 							onClick={this.handleAccept}
 							name='acceptRequest'
@@ -83,12 +82,11 @@ class ShowFriendsRequests extends React.Component {
 							{this.state.friends.filter(friend => (
 							friend.madeTheRequest === false && friend.accepted === false
 						)).map(friend => (
-							<div>
-							<p>{friend.firstName}<p>
-								</p> {friend.user.lastName}</p>
-								<img src={friend.user.image} alt={friend.firstName} />
-							<button 
-					>Pending</button>
+							<div className="option-content">
+								<img src={friend.user.image} alt={friend.firstName} className="image"/>
+							<p>{friend.firstName} {friend.user.lastName}</p>
+							<span 
+					>Pending</span>
 						</div>
 						))}
 					</div>
