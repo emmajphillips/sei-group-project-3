@@ -45,6 +45,12 @@ To install and run this app, make sure you have NPM and run  `npm install` to ge
 
 ## Build
 
+### Timeline
+
+This is the timeline that we held ourselves to:
+
+![Timeline](assets/accountable-timeline.jpg)
+
 ### Day one
 
 We spent the first day planning and wireframing, using Trello to organise tasks... 
@@ -88,6 +94,48 @@ Overview of the app:
 
 I oversaw the user models within the back-end and how it connected to the friends and expenses models in order for the app to function properly, testing various requests through Insomnia. I carried this through to the front-end where I managed the account pages, allowing users to see their balance, 'top up' or 'transfer' funds between their bank, update their profile picture and information, and set their notification preferences (NB we were unable to implement notifications during development, so this an anticipated future feature).
 
+The user model was central to the application as it acted as the central model for bringing together the friend as well as expense models: 
+
+```
+const userSchema = new mongoose.Schema({
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  phoneNumber: { type: String, required: true, unique: true },
+  image: { type: String },
+  balance: { type: Number, default: 0 },
+  friends: [friendsSchema],
+  expenses: [referenceExpenseSchema]
+}, 
+{ timestamps: true })
+```
+The user's balance was one of the bigger features of the account page on the front-end, where users could top-up:
+
+![Top-up](assets/accountable-topup.png)
+
+To top-up, users only needed to click one of the provided options. The below code, handled the logic to determine which button was selected. Firstly, it checked that it was not 'Other', which triggered a different functionality, then it would increment the balance before showing a toast notification that the operation had been successful.
+
+```
+  handleClick = async event => {
+    try {
+      if (event.target.value === 'Other') {
+        this.setState({ showInput: true })
+      } else {
+        const userId = this.props.match.params.id
+        const requestData = { ...this.state.requestData, amount: event.target.value }
+        const res = await changeBalance(userId, requestData)
+        notify.show('Balance successfully topped up', 'success', 1500)
+        this.setState({ user: res.data })
+      }
+    } catch (err) {
+      console.log(err.response)
+    }
+  }
+  ```
+
+If 'Other' was selected, an input appeared which allowed users to enter a unique amount. Once submitted, the changeBalance function was called, passing userId and the unique value.
+
 One of the small details that I worked on across the account pages and the rest of the application, was to incorporate favicons to improve user experience and add a visual beyond just text. I used Font Awesome having worked with it in the previous project.
 
 I also took on the design concept along with quite a bit of its implementation with the front-end.
@@ -100,7 +148,7 @@ A personal win from this project was how it really solidified my understanding o
 
 ### Challenges 
 
-Reflecting after the fact, the biggest challenge for this project was time management. We were meticulous in our planning at the beginning fo the project, but because this was our first full stack application, we were unsure how much time to dedicate between front and back-end development. We opted to split our time between them, so 3.5 days on the back-end and 3.5 days on the front end. While we were successful in the end, I think we would have benefitted from shifting our timelines a bit earlier and only spending two days creating the back-end, which would have given us more time to build the front of the application and to do a bit more robust testing. This is a lesson that I carried forward to the next group project, which was hugely beneficial to what we were able to produce in project four.
+Reflecting after the fact, the biggest challenge for this project was time management. We were meticulous in our planning at the beginning of the project, but because this was our first full stack application, we were unsure how much time to dedicate between front and back-end development. We opted to split our time between them, so 3.5 days on the back-end and 3.5 days on the front end. While we were successful in the end, I think we would have benefitted from shifting our timelines a bit earlier and only spending two days creating the back-end, which would have given us more time to build the front of the application and to do a bit more robust testing. This is a lesson that I carried forward to the next group project, which was hugely beneficial to what we were able to produce in project four.
 
 I also think that MongoDB was a bit of a hinderance in this project, and that it probably would have been better served by a SQL database in order to keep track of expenses between users.
 
